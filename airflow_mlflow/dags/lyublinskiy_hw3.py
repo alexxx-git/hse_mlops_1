@@ -191,10 +191,8 @@ def train_and_log_mlflow(
                 print(f'модель: {model} with metrics {metrics}')
                 mlflow.log_params(model.get_params())
                 mlflow.log_metrics(metrics)
-                logging.info("Params and metrics logged successfully")  
                 signature = infer_signature(X_test, y_pred)
                 input_example = X_train.iloc[:5]
-                logging.info("About to log model to S3...") 
                 model_info = mlflow.sklearn.log_model(
                     sk_model=model,
                     artifact_path="model",
